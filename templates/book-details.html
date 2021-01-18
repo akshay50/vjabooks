@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title> {{book.name}} - {{title}} </title>   {% endblock title %}
+{% block content %}
+
+<!-- =============== screen-wrap =============== -->
+<div class="screen-wrap">
+
+<header class="app-header absolute-top">
+	<a href="/" onclick="history.back()" class="btn btn-icon shadow rounded-circle bg-white">
+		<i class="fa fa-arrow-left"></i>
+	</a>
+</header>
+<main class="app-content">
+<section class="gallery-wrap">
+    <a href="{{book.coverphoto.url}}" data-fancybox="gallery" class="img-big-wrap"><img src="{{book.coverphoto.url}}"></a>
+</section>
+<section class="padding-around">
+
+    <p class="title-detail">{{book.name}}</p>	
+    <div class="price-wrap mb-3">
+        <span class="h5 price">₹{{book.sellingprice}}</span> <span class="text-dark ml-2"><del>₹{{book.markedprice}}</del></span> <span class="free-delivery"><i class="fas fa-motorcycle"></i>  Free Delivery</span>
+    </div> <!-- price-wrap.// -->
+    <hr>
+    <dl class="dlist-align">
+      <dt class="text-muted"><i class="fas fa-pen-nib"></i> Author</dt>
+      <dd><a href="#">{{book.author.all|join:", "}}</a></dd>
+    </dl>
+    <dl class="dlist-align">
+      <dt class="text-muted"><i class="fas fa-draw-polygon"></i> Publisher</dt>
+      <dd>{{book.publisher}}</dd>
+    </dl>
+    <dl class="dlist-align">
+      <dt class="text-muted"><i class="fas fa-store"></i> Seller</dt>
+      <dd>{{book.seller}}</dd>
+    </dl>
+    <dl class="dlist-align">
+      <dt class="text-muted"><i class="fas fa-book-reader"></i> Special For</dt>
+      <dd>{{book.competitionexam.all|join:", "}}</dd>
+    </dl>
+    
+    <dl class="dlist-align">
+      <dt class="free-delivery font-weight-bold"><i class="fas fa-motorcycle"></i> Delivery</dt>
+      <dd class="free-delivery font-weight-bold">{{book.delivery}} <i class="fas fa-check-circle"></i> Free Delivery</dd>
+    </dl>
+    <dl class="dlist-align">
+      <dt class="free-delivery font-weight-bold"><i class="fas fa-cloud-download-alt"></i> Index Pdf</dt>
+      <dd><span class="font-weight-bold"><a class="text-primary font-weight-bold" href="{{book.indexsample.url}}">Click Here</a></span></dd>
+    </dl>
+    {% if book.offer %}
+    <dl  class="dlist-align">
+      <dt class="free-delivery font-weight-bold"><i class="fas fa-tag"></i> Offer</dt>
+      <dd class="free-delivery font-weight-bold" style= "color:#27ae60;">₹{{book.offer}} Off On Online Payment</dd>
+    </dl>
+    {% endif %}
+    {% if note %}
+    <dl class="dlist-align">
+      <dt style="color:#fa26a0;" class="font-weight-bold limited-stock">🔔 Note</dt>
+      <dd>{{book.note}}</dd>
+    </dl>
+    {% endif %}
+    
+    
+    <article class="mt-3">
+    <p>
+      For Any Issue 🔔 <span class="font-weight-bold"> Call <i class="fas fa-mobile"></i> OR Whatsapp +919493000094.</span>
+    Best Book For {{book.name}} By {{book.author.all|join:", "}}.Exclusively On <span class="font-weight-bold"><a class="text-primary font-weight-bold" href="https://vacancyjobalert.com/">VacancyJobAlert.Com</a></span>
+    No.1 Sarkari Naukri Searching Portal. #Sarkari Naukri Update सबसे तेज़
+      </p>
+    </article>
+
+
+</section>
+
+<nav class="sticky-bottom">
+	<!-- ---- If In Stock ------- -->
+    {% if book.stock %}
+    {% if book.buylinkcod and book.buylinkonline %}
+<div class="row">
+<div class="cod-buy btn-group btn-group-toggle">
+  <label class="col-6 btn btn-info">
+   <a class="text-white buynow" href="{{book.buylinkcod}}"><input type="radio" name="options" id="option1" autocomplete="off"><i class="fas fa-shopping-cart"></i> Order Now (COD) <p><small>₹{{book.sellingprice}}+₹{{book.codcharge}} (COD Charge) = ₹{{book.cod_charge}}</small></p>
+  </label></a>
+  <label class="col-6 btn buy-color">
+    <a class="text-white buynow" href="{{book.buylinkonline}}"><input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-shopping-cart"></i> Order Now (Online) <p><small>₹{{book.sellingprice}} - ₹{{book.offer}} = ₹{{book.prepaid_offer}} Online Payment </small></p>
+  </label></a>
+</div>
+</div>
+{% else %}
+{% comment %} <div class="cod-buy btn buy-color"> {% endcomment %}
+  <button type="button" class="online-buy buy-color border-0"><a class="text-white" href="{{book.buylinkonline}}"><i class="fas fa-shopping-cart"></i> Order Now (Online) 
+  <p><small>₹{{book.sellingprice}} - ₹{{book.offer}} = ₹{{book.prepaid_offer}} Online Payment </small></p></a></button>
+
+{% endif %}
+    {% else %}
+	<!-------- Out Of Stock ------////-->
+    <button type="button" class="vja-button out-of-stock text-white border-0" disabled><i class="fas fa-shopping-cart"></i> Out Of Stock</button>
+</nav> <!-- nav-bottom -->
+    {% endif %}
+</main>
+<!-- =============== screen-wrap end.// =============== -->
+
+{% endblock content %}

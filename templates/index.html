@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- =============== screen-wrap =============== -->
+{% block title %} <title>{{home_title}}</title> {% endblock title %}
+{% block content %}
+<div class="screen-wrap">
+<header style="background-color:#f2c210;"  class="app-header sticky-top mb-4">
+    <h5 class="m-2">VJABooks.Com </h5>
+    <div class="header-right">  <span class="btn-header"> <i class="fa fa-bell"></i> </span> </div>
+</header> <!-- section-header.// -->
+<div class="container pt-4 mt-4">
+<h3 class="text-center font-vga font-weight-bold mt-4" style="color:#ff3e6c;">Welcome To The VacancyJobAlert.Com Books Portal.</h3>
+<h4><div class="alert alert-success text-center font-vga">Book Order कैसे करें? इस वीडियो में देखें ::-<a href="https://youtu.be/P8bhwcDuCV8"> Click Here</a></div></h4>
+<h4><div class="alert text-center bg-warning bg-gradient font-vga">समस्या एवं पूछताछ Call :: +91-9493000096</div></h4>
+</div>
+
+<main class="app-content">
+
+{% for ct3 in cat3 %}
+{% if ct3.book_set.all %}
+<hr class="divider my-3">
+<h5 class="title-section cat-head-color-{{ct3.id}} cat-heading"><i data-vi="flame"></i> {{ct3}} 🎉 Limited Stock </h5>
+<section class="scroll-horizontal padding-x">
+{% for bk in ct3.book_set.all %}
+	<div style="width:315px;" class="item">
+		<div class="product-sm">
+			{% if bk.stock %}
+			<div class="card-banner rounded mr-2">
+			<div class="card-body bg-warning" style="height:180px; background-image: url('{{bk.coverphoto.url}}');"> </div>
+			</div>
+
+			{% else %}
+			<div class="card-banner rounded mr-2">
+			<div class="card-body bg-warning" style="height:180px; background-image: url('{{bk.coverphoto.url}}');"> </div>
+			<div class="text-bottom text-center"><a href="#"><h5 class="title btn btn-light">Out Of Stock</h5></a></div>
+			</div>
+			{% endif %}
+
+			<div class="text-wrap">
+				<p class="title text-truncate">{{bk.name}}</p>
+				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
+                {% if bk.stock %}
+                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+		        {% else %}
+				<a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="stock-from viewdetail-button text-white btn-block btn-sm" type="button"> View Detail</button></a>
+			    {% endif %}
+            </div>
+		</div>
+	</div>
+    {% endfor %}
+</section>
+{% endif %}
+{% endfor %}
+
+
+
+{% for cat in cate12 %}
+{% if cat.book_set.all %}
+<hr class="divider my-3">
+{% if cat.id == 1 %}
+<h5 class="title-section cat-head-color-{{cat.id}} cat-heading "><i data-vi="bag"></i> {{cat}}</h5>
+{% endif %}
+{% if cat.id == 2 %}
+<h5 class="title-section cat-head-color-{{cat.id}} cat-heading "><i data-vi="box"></i> {{cat}}</h5>
+{% endif %}
+
+<section class="scroll-horizontal  padding-x">
+    {% for bk in cat.book_set.all %}
+	<div class="item">
+		<div class="product-sm">
+			<a href="{% url 'book-details' bk.slug %}"><div class="img-wrap"> <img src="{{bk.coverphoto.url}}"> </div></a>
+			<div class="text-wrap">
+				<p class="title text-truncate">{{bk.name}}</p>
+				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
+			    {% if bk.stock %}
+                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+		        {% else %}
+                <button type="button" class="out-of-stock viewdetail-button text-white btn-block btn-sm" disabled> Out Of Stock</button>
+			    {% endif %}
+			</div>
+		</div>
+	</div>
+    {% endfor %}
+</section> 
+{% endif %}
+{% endfor %}
+
+{% for ct5 in cat5 %}
+{% if ct5.book_set.all %}
+<hr class="divider my-3">
+<h5 class="title-section cat-head-color-{{ct5.id}} cat-heading "><i data-vi="calendar"></i> {{ct5}}</h5>
+<section class="scroll-horizontal  padding-x">
+    {% for bk in ct5.book_set.all %}
+	<div class="item">
+		<div class="product-sm">
+			<div class="img-wrap"> <img src="{{bk.coverphoto.url}}"> </div>
+			<div class="text-wrap">
+				<p class="title text-truncate">{{bk.name}}</p>
+				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
+                <button type="button" class="book-comingsoon viewdetail-button text-white btn-block btn-sm" disabled> {{bk.comingsoon}}</button>
+			  
+			</div>
+		</div>
+	</div>
+    {% endfor %}
+</section> 
+{% endif %}
+{% endfor %}
+
+{% for ct4 in cat4 %}
+{% if ct4.book_set.all %}
+<hr class="divider my-3">
+<h5 class="title-section cat-head-color-{{ct4.id}} cat-heading "><i data-vi="close"></i> {{ct4}}</h5>
+<section class="padding-around scroll-horizontal">
+{% for bk in ct4.book_set.all %}
+	{% if not bk.stock %}
+	<div class="item-slider card-banner rounded mr-2">
+	  <a href="{% url 'book-details' bk.slug %}"><div class="card-body bg-warning" style="height:180px; background-image: url('{{bk.coverphoto.url}}');"> </div></a>
+	  <div class="text-bottom text-center"><a href="{% url 'book-details' bk.slug %}"><h5 class="title btn btn-light">Out Of Stock</h5></a></div>
+	</div>
+	{% endif %}
+{% endfor %}
+</section>
+{% endif %}
+{% endfor %}
+
+
+
+
+{% comment %} <section class="scroll-horizontal padding-x">
+{% for bk in cat.book_set.all %}
+	<div style="width:315px;" class="item">
+		<div class="product-sm">
+			{% if bk.stock %}
+			<div class="card-banner rounded mr-2">
+			<div class="card-body bg-warning" style="height:180px; background-image: url('{{bk.coverphoto.url}}');"> </div>
+			</div>
+
+			{% else %}
+			<div class="card-banner rounded mr-2">
+			<div class="card-body bg-warning" style="height:180px; background-image: url('{{bk.coverphoto.url}}');"> </div>
+			<div class="text-bottom text-center"><a href="#"><h5 class="title btn btn-light">Out Of Stock</h5></a></div>
+			</div>
+			{% endif %}
+
+			<div class="text-wrap">
+				<p class="title text-truncate">{{bk.name}}</p>
+				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
+                {% if bk.stock %}
+                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+		        {% else %}
+				<a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="stock-from viewdetail-button text-white btn-block btn-sm" type="button"> View Detail</button></a>
+			    {% endif %}
+            </div>
+		</div>
+	</div>
+    {% endfor %}
+</section> {% endcomment %}
+
+{% comment %} <hr class="divider my-3">
+<h5 class="title-section"><i data-vi="bag"></i> New Arrival</h5>
+<section class="scroll-horizontal  padding-x">
+    {% for bk in book %}
+	<div class="item">
+		<div class="product-sm">
+			<div class="img-wrap"> <img src="{{bk.coverphoto.url}}"> </div>
+			<div class="text-wrap">
+				<p class="title text-truncate">{{bk.name}}</p>
+				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
+			    {% if bk.stock %}
+                <a class="text-decoration-none" href="{{book.buylink}}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+		        {% else %}
+                <button type="button" class="out-of-stock viewdetail-button text-white btn-block btn-sm" disabled> Out Of Stock</button>
+			    {% endif %}
+			</div>
+		</div>
+	</div>
+    {% endfor %}
+</section> 
+<hr class="divider my-3">
+
+<h5 class="title-section"><i data-vi="box"></i> Bundle Best Deals</h5>
+<section class="scroll-horizontal padding-x">
+{% for bk in book %}
+	<div class="item">
+		<div class="product-sm">
+			<div class="img-wrap"> <img src="{{bk.coverphoto.url}}"> </div>
+			<div class="text-wrap">
+				<p class="title text-truncate">{{bk.name}}</p>
+				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
+			{% if bk.stock %}
+                <a class="text-decoration-none" href="{{book.buylink}}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+		        {% else %}
+                <button type="button" class="out-of-stock viewdetail-button text-white btn-block btn-sm" disabled> Out Of Stock</button>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</section>
+<hr class="divider my-3">
+{% if not stock %}
+<h5 class="title-section d-none"><i data-vi="close"></i>In Stock</h5>
+{% endif %}
+
+<section class="padding-around scroll-horizontal">
+{% for bk in book %}
+	{% if not bk.stock %}
+	<div class="item-slider card-banner rounded mr-2">
+	  <div class="card-body bg-warning" style="height:180px; background-image: url('{{bk.coverphoto.url}}');"> </div>
+	  <div class="text-bottom text-center"><h5 class="title d-inline">Trending </h5><a href="#"><h5 class="title btn btn-light">Out Of Stock</h5></a></div>
+	</div>
+	{% endif %}
+{% endfor %}
+</section> {% endcomment %}
+
+</main>
+<footer style="background-color:#f2c210;"  class="app-header">
+    <h5 class="m-2"><i class="far fa-copyright"></i> 2018-21 VJABooks.Com. A Part Of VacancyJobAlert.Com</h5>
+</footer> <!-- section-footer.// -->
+</div> 
+<!-- =============== screen-wrap end.// =============== -->
+{% endblock content %}
