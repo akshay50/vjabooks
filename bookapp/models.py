@@ -57,11 +57,11 @@ class Book(models.Model):
     codcharge = models.PositiveIntegerField(default='1')
     categories = models.ManyToManyField(Category)
     author = models.ManyToManyField(Author)
-    publisher = models.ForeignKey(Publisher, on_delete = models.CASCADE)
+    publisher = models.ManyToManyField(Publisher)
     competitionexam = models.ManyToManyField(CompetitionExam)
-    indexsample = models.FileField(upload_to='bookindex/')
+    indexsample = models.FileField(upload_to="bookindex", blank=True)
     pages = models.PositiveSmallIntegerField()
-    coverphoto = models.ImageField(upload_to='coverphoto/')
+    coverphoto = models.ImageField(upload_to="coverphoto" )
     seller = models.CharField(max_length=100, choices=SELLER_CHOICES, default='1')
     delivery = models.CharField(max_length=100, choices=DELIVERY_CHOICES, default='1')
     offer = models.PositiveIntegerField(blank=True, default='1')
@@ -70,6 +70,7 @@ class Book(models.Model):
     buylinkonline = models.URLField(default='1')
     stock = models.BooleanField(default=False)
     onboard_date = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

@@ -10,8 +10,10 @@
 </header> <!-- section-header.// -->
 <div class="container pt-4 mt-4">
 <h3 class="text-center font-vga font-weight-bold mt-4" style="color:#ff3e6c;">Welcome To The VacancyJobAlert.Com Books Portal.</h3>
-<h4><div class="alert alert-success text-center font-vga">Book Order कैसे करें? इस वीडियो में देखें ::-<a href="https://youtu.be/P8bhwcDuCV8"> Click Here</a></div></h4>
-<h4><div class="alert text-center bg-warning bg-gradient font-vga">समस्या एवं पूछताछ Call :: +91-9493000096</div></h4>
+<h4><div class="alert alert-success text-center font-vga">
+<p>
+समस्या एवं पूछताछ Call :: +91-9493000096
+</p> <p>Book Order कैसे करें? इस वीडियो में देखें ::-<a href="https://youtu.be/P8bhwcDuCV8"> Click Here</a></p> </div></h4>
 </div>
 
 <main class="app-content">
@@ -40,7 +42,7 @@
 				<p class="title text-truncate">{{bk.name}}</p>
 				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
                 {% if bk.stock %}
-                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> View Details</button></a>
 		        {% else %}
 				<a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="stock-from viewdetail-button text-white btn-block btn-sm" type="button"> View Detail</button></a>
 			    {% endif %}
@@ -65,7 +67,7 @@
 {% endif %}
 
 <section class="scroll-horizontal  padding-x">
-    {% for bk in cat.book_set.all %}
+    {% for bk in cat.book_set.all|dictsortreversed:"updated" %}
 	<div class="item">
 		<div class="product-sm">
 			<a href="{% url 'book-details' bk.slug %}"><div class="img-wrap"> <img src="{{bk.coverphoto.url}}"> </div></a>
@@ -73,7 +75,7 @@
 				<p class="title text-truncate">{{bk.name}}</p>
 				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
 			    {% if bk.stock %}
-                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> View Details</button></a>
 		        {% else %}
                 <button type="button" class="out-of-stock viewdetail-button text-white btn-block btn-sm" disabled> Out Of Stock</button>
 			    {% endif %}
@@ -147,7 +149,7 @@
 				<p class="title text-truncate">{{bk.name}}</p>
 				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
                 {% if bk.stock %}
-                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+                <a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> View Details</button></a>
 		        {% else %}
 				<a class="text-decoration-none" href="{% url 'book-details' bk.slug %}"><button name="buy-button" id="1" class="stock-from viewdetail-button text-white btn-block btn-sm" type="button"> View Detail</button></a>
 			    {% endif %}
@@ -168,7 +170,7 @@
 				<p class="title text-truncate">{{bk.name}}</p>
 				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
 			    {% if bk.stock %}
-                <a class="text-decoration-none" href="{{book.buylink}}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+                <a class="text-decoration-none" href="{{book.buylink}}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> View Details</button></a>
 		        {% else %}
                 <button type="button" class="out-of-stock viewdetail-button text-white btn-block btn-sm" disabled> Out Of Stock</button>
 			    {% endif %}
@@ -189,7 +191,7 @@
 				<p class="title text-truncate">{{bk.name}}</p>
 				<div class="price font-weight-bold"><h4 class="d-inline-block font-weight-bold">₹{{bk.sellingprice}}</h4> <span class="text-dark ml-2"><del>₹{{bk.markedprice}}</del></span></div> <!-- price-wrap.// -->
 			{% if bk.stock %}
-                <a class="text-decoration-none" href="{{book.buylink}}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> Order Now</button></a>
+                <a class="text-decoration-none" href="{{book.buylink}}"><button name="buy-button" id="1" class="buy-color viewdetail-button text-white btn-block btn-sm" type="button"><i class="fas fa-shopping-cart"></i> View Details</button></a>
 		        {% else %}
                 <button type="button" class="out-of-stock viewdetail-button text-white btn-block btn-sm" disabled> Out Of Stock</button>
 			{% endif %}

@@ -24,11 +24,11 @@
     <hr>
     <dl class="dlist-align">
       <dt class="text-muted"><i class="fas fa-pen-nib"></i> Author</dt>
-      <dd><a href="#">{{book.author.all|join:", "}}</a></dd>
+      <dd class="text-truncate">{{book.author.all|join:", "}}</dd>
     </dl>
     <dl class="dlist-align">
       <dt class="text-muted"><i class="fas fa-draw-polygon"></i> Publisher</dt>
-      <dd>{{book.publisher}}</dd>
+      <dd class="text-truncate">{{book.publisher.all|join:", "}}</dd>
     </dl>
     <dl class="dlist-align">
       <dt class="text-muted"><i class="fas fa-store"></i> Seller</dt>
@@ -36,31 +36,33 @@
     </dl>
     <dl class="dlist-align">
       <dt class="text-muted"><i class="fas fa-book-reader"></i> Special For</dt>
-      <dd>{{book.competitionexam.all|join:", "}}</dd>
+      <dd class="text-truncate">{{book.competitionexam.all|join:", "}}</dd>
     </dl>
     
     <dl class="dlist-align">
       <dt class="free-delivery font-weight-bold"><i class="fas fa-motorcycle"></i> Delivery</dt>
       <dd class="free-delivery font-weight-bold">{{book.delivery}} <i class="fas fa-check-circle"></i> Free Delivery</dd>
     </dl>
+    {% if book.indexsample %}
     <dl class="dlist-align">
       <dt class="free-delivery font-weight-bold"><i class="fas fa-cloud-download-alt"></i> Index Pdf</dt>
-      <dd><span class="font-weight-bold"><a class="text-primary font-weight-bold" href="{{book.indexsample.url}}">Click Here</a></span></dd>
+      <dd><span class="font-weight-bold"><a class="text-primary font-weight-bold" href="{{book.indexsample.url}}">Click Here <i class="far fa-file-pdf" style="color:red;"></i></a></span></dd>
     </dl>
+    {% endif %}
     {% if book.offer %}
     <dl  class="dlist-align">
       <dt class="free-delivery font-weight-bold"><i class="fas fa-tag"></i> Offer</dt>
-      <dd class="free-delivery font-weight-bold" style= "color:#27ae60;">₹{{book.offer}} Off On Online Payment</dd>
+      <dd class="free-delivery font-weight-bold" style= "color:green;">₹{{book.offer}} Off On Online Payment</dd>
     </dl>
     {% endif %}
-    {% if note %}
+    {% if book.note %}
     <dl class="dlist-align">
-      <dt style="color:#fa26a0;" class="font-weight-bold limited-stock">🔔 Note</dt>
+      <dt style="color:#fa26a0;" class="font-weight-bold limited-stock">🔔 Note <i class="fas fa-caret-right"></i></dt>
       <dd>{{book.note}}</dd>
     </dl>
     {% endif %}
     
-    
+    <hr>
     <article class="mt-3">
     <p>
       For Any Issue 🔔 <span class="font-weight-bold"> Call <i class="fas fa-mobile"></i> OR Whatsapp +919493000094.</span>
@@ -79,17 +81,17 @@
 <div class="row">
 <div class="cod-buy btn-group btn-group-toggle">
   <label class="col-6 btn btn-info">
-   <a class="text-white buynow" href="{{book.buylinkcod}}"><input type="radio" name="options" id="option1" autocomplete="off"><i class="fas fa-shopping-cart"></i> Order Now (COD) <p><small>₹{{book.sellingprice}}+₹{{book.codcharge}} (COD Charge) = ₹{{book.cod_charge}}</small></p>
+   <a class="text-white buynow" href="{{book.buylinkcod}}"><input type="radio" name="options" id="option1" autocomplete="off"><i class="fas fa-shopping-cart"></i> Order Now (COD) <p><small>₹{{book.sellingprice}}+₹{{book.codcharge}} COD = ₹{{book.cod_charge}}</small></p>
   </label></a>
   <label class="col-6 btn buy-color">
-    <a class="text-white buynow" href="{{book.buylinkonline}}"><input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-shopping-cart"></i> Order Now (Online) <p><small>₹{{book.sellingprice}} - ₹{{book.offer}} = ₹{{book.prepaid_offer}} Online Payment </small></p>
+    <a class="text-white buynow" href="{{book.buylinkonline}}"><input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-shopping-cart"></i> Order Now (Pay Online) <p><small>₹{{book.sellingprice}} - ₹{{book.offer}} Offer = ₹{{book.prepaid_offer}}</small></p>
   </label></a>
 </div>
 </div>
 {% else %}
 {% comment %} <div class="cod-buy btn buy-color"> {% endcomment %}
-  <button type="button" class="online-buy buy-color border-0"><a class="text-white" href="{{book.buylinkonline}}"><i class="fas fa-shopping-cart"></i> Order Now (Online) 
-  <p><small>₹{{book.sellingprice}} - ₹{{book.offer}} = ₹{{book.prepaid_offer}} Online Payment </small></p></a></button>
+  <button type="button" class="online-buy buy-color border-0"><a class="text-white" href="{{book.buylinkonline}}"><i class="fas fa-shopping-cart"></i> Order Now (Pay Online) 
+  <p><small>₹{{book.sellingprice}} - ₹{{book.offer}} Offer = ₹{{book.prepaid_offer}} </small></p></a></button>
 
 {% endif %}
     {% else %}

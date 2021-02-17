@@ -3,7 +3,7 @@ from .models import *
 # Create your views here.
 def home(request):
     home_title = 'Buy Books - VJABooks.Com'
-    book = Book.objects.all()
+    book = Book.objects.all().order_by('datetime__minute')
     cate12 = Category.objects.filter(pk__in=[1,2])
     cat3 = Category.objects.filter(pk__in=[3])
     cat4 = Category.objects.filter(pk__in=[4])
